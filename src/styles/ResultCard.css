@@ -1,0 +1,114 @@
+/* ResultCard Styles */
+.result-card {
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-top: 2rem;
+    border: 1px solid transparent;
+    width: 100%;
+}
+
+.result-card.status-human {
+    border-color: var(--status-success-bg);
+    background: linear-gradient(145deg, rgba(16, 185, 129, 0.05), var(--bg-surface));
+}
+
+.result-card.status-ai {
+    border-color: var(--status-error-bg);
+    background: linear-gradient(145deg, rgba(239, 68, 68, 0.05), var(--bg-surface));
+}
+
+.result-card.status-mixed {
+    border-color: var(--status-warning-bg);
+    background: linear-gradient(145deg, rgba(245, 158, 11, 0.05), var(--bg-surface));
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.status-human .result-header {
+    color: var(--status-success-text);
+}
+
+.status-ai .result-header {
+    color: var(--status-error-text);
+}
+
+.status-mixed .result-header {
+    color: var(--status-warning-text);
+}
+
+.result-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.score-container {
+    margin-bottom: 1.5rem;
+}
+
+.score-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.score-bar-bg {
+    height: 12px;
+    background: var(--bg-surface-hover);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.score-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 1s ease-out;
+}
+
+.status-human .score-bar-fill {
+    background: var(--status-success-text);
+}
+
+.status-ai .score-bar-fill {
+    background: var(--status-error-text);
+}
+
+.status-mixed .score-bar-fill {
+    background: var(--status-warning-text);
+}
+
+.score-value {
+    margin-top: 0.5rem;
+    text-align: right;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.result-details {
+    background: var(--bg-page);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+}
+
+.result-details h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.details-json {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

@@ -1,0 +1,56 @@
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-page);
+    position: relative;
+}
+
+.dashboard-content {
+    flex: 1;
+    margin-left: 260px;
+    padding: 0;
+    background: var(--bg-page);
+    transition: all 0.3s ease;
+}
+
+.content-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-content {
+        margin-left: 80px; /* Collapsed sidebar width if applicable, or we can just say 0 if mobile */
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-content {
+        margin-left: 0;
+        padding-bottom: 80px; /* Space for bottom mobile nav if needed */
+    }
+}
+
+/* RTL OVERRIDES */
+:root[dir='rtl'] .dashboard-content {
+    margin-left: 0;
+    margin-right: 260px;
+}
+
+@media (max-width: 1024px) {
+    :root[dir='rtl'] .dashboard-content {
+        margin-left: 0;
+        margin-right: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root[dir='rtl'] .dashboard-content {
+        margin-left: 0;
+        margin-right: 0;
+        padding-bottom: 80px;
+    }
+}

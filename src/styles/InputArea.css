@@ -1,0 +1,53 @@
+/* InputArea - Clean Doc Editor Style */
+.input-area-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.input-textarea {
+    width: 100%;
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    /* Slightly larger for reading */
+    line-height: 1.75;
+    resize: none;
+    outline: none;
+    font-family: var(--font-family);
+    padding: 0;
+    margin: 0;
+}
+
+.input-textarea::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Custom Scrollbar for textarea */
+.input-textarea::-webkit-scrollbar {
+    width: 6px;
+}
+
+.input-textarea::-webkit-scrollbar-thumb {
+    background-color: var(--border-subtle);
+    border-radius: 3px;
+}
+
+.input-footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 0.75rem;
+}
+
+.char-count {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+}
