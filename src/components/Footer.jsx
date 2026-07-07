@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldAlert, Twitter, Github, Linkedin, Mail } from 'lucide-react';
+import { Twitter, Github, Linkedin, Mail } from 'lucide-react';
 import { useSettingsStore } from '../application/store/useSettingsStore';
 import { translations } from '../application/utils/translations';
 import '../styles/Footer.css';
@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="footer-container">
                 <div className="footer-brand">
                     <Link to="/" className="footer-logo">
-                        <ShieldAlert size={34} color="var(--accent-primary)" style={{ filter: 'drop-shadow(0 0 8px var(--accent-glow))' }} />
+                        <img src="/logo.jpg" alt="Logo" style={{ width: '34px', height: '34px', borderRadius: '8px', objectFit: 'cover', filter: 'drop-shadow(0 0 8px var(--accent-glow))' }} />
                         <span className="logo-text">Sentinel <span className="logo-highlight">AI</span></span>
                     </Link>
                     <p className="footer-tagline">

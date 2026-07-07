@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ArrowRight, Zap, Target, Lock, PlayCircle, Mic, Image as ImageIcon, Binary, ShieldAlert, Cpu } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Zap, Target, Lock, UserPlus, Mic, Image as ImageIcon, Binary, ShieldAlert, Cpu } from 'lucide-react';
 import { Link, useOutletContext } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSettingsStore } from '../application/store/useSettingsStore';
@@ -591,7 +591,7 @@ const Home = () => {
                         <Link to="/auth/register" className="secondary-btn" style={{
                             padding: '1.2rem 3rem', fontSize: '1.1rem', borderRadius: '14px',
                         }}>
-                            {t.sandbox} <PlayCircle size={20} />
+                            {t.sandbox} <UserPlus size={20} />
                         </Link>
                     </motion.div>
                 </div>

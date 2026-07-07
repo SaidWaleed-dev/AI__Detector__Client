@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { tokenService } from '../storage/tokenService';
 
-const API_BASE_URL = 'http://localhost:5050';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5050';
 
 // Mock database helpers
 const getMockUsers = () => JSON.parse(localStorage.getItem('sentinel_mock_users') || '[]');
@@ -203,7 +203,32 @@ const mockAdapter = async (config) => {
         return response(200, mockResult);
     }
 
+    if (url.match(/\/api\/detection\/history\/clear\/([\w-]+)/)) {
+        const userId = url.split('/').pop();
+        saveMockHistory(userId, []);
+        return response(200, { message: 'History cleared successfully' });
+    }
+
     if (url.match(/\/api\/detection\/history\/([\w-]+)/)) {
+        if (method && method.toLowerCase() === 'delete') {
+            const contentId = url.split('/').pop();
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('sentinel_mock_history_')) {
+                    try {
+                        const history = JSON.parse(localStorage.getItem(key) || '[]');
+                        const filtered = history.filter(item => item.contentId !== contentId);
+                        if (filtered.length !== history.length) {
+                            localStorage.setItem(key, JSON.stringify(filtered));
+                            break;
+                        }
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+            }
+            return response(200, { message: 'Record deleted successfully' });
+        }
         const userId = url.split('/').pop();
         const history = getMockHistory(userId);
         return response(200, history);

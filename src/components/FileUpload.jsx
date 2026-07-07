@@ -6,6 +6,7 @@ import '../styles/FileUpload.css';
 const ACCEPT_MAP = {
     'image/*': { 'image/*': [] },
     'audio/*': { 'audio/*': [] },
+    'video/*': { 'video/*': [] },
 };
 
 const FileUpload = ({ onFileSelect, selectedFile, accept = 'image/*', t }) => {
@@ -28,7 +29,11 @@ const FileUpload = ({ onFileSelect, selectedFile, accept = 'image/*', t }) => {
         return <FileText size={48} className="file-icon" />;
     };
 
-    const uploadPrompt = accept === 'audio/*' ? t.upload_prompt_audio : t.upload_prompt_image;
+    const uploadPrompt = accept === 'audio/*' 
+        ? t.upload_prompt_audio 
+        : accept === 'video/*' 
+            ? t.upload_prompt_video 
+            : t.upload_prompt_image;
 
     return (
         <div className="file-upload-container">

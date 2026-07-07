@@ -9,7 +9,7 @@ import FileUpload from './FileUpload';
 import ScoreCard from './ScoreCard';
 import '../styles/DetectorInterface.css';
 
-const FILE_TABS = ['image', 'audio'];
+const FILE_TABS = ['image', 'audio', 'video'];
 
 const DetectorInterface = () => {
     const [activeTab, setActiveTab] = useState('text');
@@ -101,14 +101,18 @@ const DetectorInterface = () => {
             );
         }
 
-        return (
-            <div className="video-coming-soon">
-                <div className="video-coming-soon-icon">
-                    <Video size={48} strokeWidth={1.5} />
-                </div>
-                <p className="video-coming-soon-title">{t.video_coming_soon}</p>
-            </div>
-        );
+        if (activeTab === 'video') {
+            return (
+                <FileUpload
+                    onFileSelect={handleFileChange}
+                    selectedFile={fileContent}
+                    accept="video/*"
+                    t={t}
+                />
+            );
+        }
+
+        return null;
     };
 
     return (
@@ -166,39 +170,37 @@ const DetectorInterface = () => {
                         </AnimatePresence>
                     </div>
 
-                    {!isVideoTab && (
-                        <div className="detector-action-bar">
-                            <AnimatePresence>
-                                {error && (
-                                    <motion.span 
-                                        initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
-                                        className="error-text mr-4 text-sm" 
-                                        style={{ color: 'var(--status-error-text)' }}
-                                    >
-                                        {error}
-                                    </motion.span>
-                                )}
-                            </AnimatePresence>
-                            <motion.button
-                                whileHover={{ scale: isRunDisabled ? 1 : 1.02 }}
-                                whileTap={{ scale: isRunDisabled ? 1 : 0.98 }}
-                                className="primary-btn"
-                                onClick={handleDetection}
-                                disabled={isRunDisabled}
-                                style={{ position: 'relative', overflow: 'hidden' }}
-                            >
-                                {(loading || isProcessing) && (
-                                    <motion.div 
-                                        style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }}
-                                        animate={{ x: ['-100%', '100%'] }}
-                                        transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
-                                    />
-                                )}
-                                {(loading || isProcessing) ? <Loader2 className="animate-spin" size={18} /> : <Play size={18} fill="currentColor" />}
-                                <span>{(loading || isProcessing) ? t.processing : t.run_detection}</span>
-                            </motion.button>
-                        </div>
-                    )}
+                    <div className="detector-action-bar">
+                        <AnimatePresence>
+                            {error && (
+                                <motion.span 
+                                    initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
+                                    className="error-text mr-4 text-sm" 
+                                    style={{ color: 'var(--status-error-text)' }}
+                                >
+                                    {error}
+                                </motion.span>
+                            )}
+                        </AnimatePresence>
+                        <motion.button
+                            whileHover={{ scale: isRunDisabled ? 1 : 1.02 }}
+                            whileTap={{ scale: isRunDisabled ? 1 : 0.98 }}
+                            className="primary-btn"
+                            onClick={handleDetection}
+                            disabled={isRunDisabled}
+                            style={{ position: 'relative', overflow: 'hidden' }}
+                        >
+                            {(loading || isProcessing) && (
+                                <motion.div 
+                                    style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }}
+                                    animate={{ x: ['-100%', '100%'] }}
+                                    transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}
+                                />
+                            )}
+                            {(loading || isProcessing) ? <Loader2 className="animate-spin" size={18} /> : <Play size={18} fill="currentColor" />}
+                            <span>{(loading || isProcessing) ? t.processing : t.run_detection}</span>
+                        </motion.button>
+                    </div>
                 </div>
             </motion.div>
 

@@ -245,13 +245,29 @@
     font-size: 0.9rem;
     color: var(--text-secondary);
     max-height: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: break-word;
     border: 1px solid var(--border-subtle);
     line-height: 1.6;
+}
+
+.history-content-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-content-text::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.history-content-text::-webkit-scrollbar-thumb {
+    background-color: var(--border-subtle);
+    border-radius: 3px;
+}
+
+.history-content-text::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-tertiary);
 }
 
 .history-content-image {

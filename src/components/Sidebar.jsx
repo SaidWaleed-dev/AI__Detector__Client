@@ -1,4 +1,4 @@
-import { LayoutDashboard, History, LogOut, ShieldAlert } from 'lucide-react';
+import { LayoutDashboard, History, LogOut } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../application/store/useAuthStore';
 import { motion } from 'framer-motion';
@@ -23,7 +23,7 @@ const Sidebar = () => {
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
         >
             <div className="sidebar-header">
-                <ShieldAlert className="brand-icon" size={28} color="var(--accent-primary)" />
+                <img src="/logo.jpg" alt="Logo" className="brand-icon" style={{ width: '28px', height: '28px', borderRadius: '6px', objectFit: 'cover' }} />
                 <span className="brand-name">Sentinel<span className="brand-highlight" style={{ color: 'var(--accent-primary)' }}>AI</span></span>
             </div>
 

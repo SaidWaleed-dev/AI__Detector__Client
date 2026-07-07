@@ -2,7 +2,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 import { useAuthStore } from '../../application/store/useAuthStore';
 import { motion } from 'framer-motion';
 import './AuthLayout.css';
-import { ShieldAlert, Sparkles, Binary, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Binary, CheckCircle2 } from 'lucide-react';
 
 const AuthLayout = () => {
     const { isAuthenticated } = useAuthStore();
@@ -26,7 +26,7 @@ const AuthLayout = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
                     >
-                        <ShieldAlert size={64} color="var(--accent-primary)" style={{ filter: 'drop-shadow(0 0 10px var(--accent-glow))' }} />
+                        <img src="/logo.jpg" alt="Logo" style={{ width: '64px', height: '64px', borderRadius: '12px', objectFit: 'cover', filter: 'drop-shadow(0 0 10px var(--accent-glow))' }} />
                         <h1 style={{ fontFamily: 'var(--font-heading)' }}>Sentinel AI</h1>
                     </motion.div>
                     <motion.div

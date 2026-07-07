@@ -1,4 +1,4 @@
-import { ShieldAlert, LogIn, LayoutDashboard, ChevronRight, Sun, Moon, Globe } from 'lucide-react';
+import { LogIn, LayoutDashboard, ChevronRight, Sun, Moon, Globe } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../application/store/useAuthStore';
 import { useSettingsStore } from '../application/store/useSettingsStore';
@@ -44,7 +44,7 @@ const Header = ({ activeSection }) => {
         >
             <div className="header-container">
                 <Link to="/" className="logo">
-                    <ShieldAlert size={34} color="var(--accent-primary)" style={{ filter: 'drop-shadow(0 0 8px var(--accent-glow))' }} />
+                    <img src="/logo.jpg" alt="Logo" style={{ width: '34px', height: '34px', borderRadius: '8px', objectFit: 'cover', filter: 'drop-shadow(0 0 8px var(--accent-glow))' }} />
                     <span className="logo-text">Sentinel <span className="logo-highlight">AI</span></span>
                 </Link>
 

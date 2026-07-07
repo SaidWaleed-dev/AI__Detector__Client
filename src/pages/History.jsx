@@ -12,12 +12,9 @@ import {
     Search,
     Trash2,
     AlertTriangle,
-    RotateCcw,
 } from 'lucide-react';
 import ScoreCard from '../components/ScoreCard';
 import '../styles/History.css';
-
-const UNDO_TIMEOUT_MS = 5000;
 
 const getContentTypeLabel = (type) => {
     switch (type) {
@@ -61,30 +58,7 @@ const History = () => {
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [pendingDelete, setPendingDelete] = useState(null);
-    const [undoSnapshot, setUndoSnapshot] = useState(null);
-    const undoTimeoutRef = useRef(null);
     const { user } = useAuthStore();
-
-    const clearUndoTimer = useCallback(() => {
-        if (undoTimeoutRef.current) {
-            clearTimeout(undoTimeoutRef.current);
-            undoTimeoutRef.current = null;
-        }
-    }, []);
-
-    const dismissUndo = useCallback(() => {
-        clearUndoTimer();
-        setUndoSnapshot(null);
-    }, [clearUndoTimer]);
-
-    const showUndoBanner = useCallback((snapshot) => {
-        clearUndoTimer();
-        setUndoSnapshot(snapshot);
-        undoTimeoutRef.current = setTimeout(() => {
-            setUndoSnapshot(null);
-            undoTimeoutRef.current = null;
-        }, UNDO_TIMEOUT_MS);
-    }, [clearUndoTimer]);
 
     useEffect(() => {
         const fetchHistory = async () => {
@@ -105,8 +79,6 @@ const History = () => {
         fetchHistory();
     }, [user?.id]);
 
-    useEffect(() => () => clearUndoTimer(), [clearUndoTimer]);
-
     const filteredItems = useMemo(
         () => filterHistoryItems(historyItems, searchQuery),
         [historyItems, searchQuery]
@@ -125,44 +97,25 @@ const History = () => {
         setPendingDelete(null);
     };
 
-    const handleConfirmDelete = () => {
+    const handleConfirmDelete = async () => {
         if (!pendingDelete) return;
 
-        if (pendingDelete.type === 'single') {
-            const deletedItem = historyItems.find((item) => item.contentId === pendingDelete.id);
-            if (!deletedItem) {
-                setPendingDelete(null);
-                return;
+        try {
+            if (pendingDelete.type === 'single') {
+                await detectionService.deleteHistoryItem(pendingDelete.id);
+                setHistoryItems((prev) => prev.filter((item) => item.contentId !== pendingDelete.id));
+            } else if (pendingDelete.type === 'ALL') {
+                if (user?.id) {
+                    await detectionService.clearHistory(user.id);
+                    setHistoryItems([]);
+                }
             }
-
-            // TODO: Hook up backend DELETE API here — DELETE /api/detection/history/{contentId}
-            const previousList = [...historyItems];
-            setHistoryItems((prev) => prev.filter((item) => item.contentId !== pendingDelete.id));
-            showUndoBanner({
-                mode: 'single',
-                label: `1 record deleted`,
-                previousList,
-            });
-        } else if (pendingDelete.type === 'ALL') {
-            // TODO: Hook up backend DELETE ALL API here — DELETE /api/detection/history/{userId}
-            const previousList = [...historyItems];
-            setHistoryItems([]);
-            showUndoBanner({
-                mode: 'all',
-                label: `${previousList.length} records deleted`,
-                previousList,
-            });
+        } catch (err) {
+            console.error("Failed to delete", err);
+            alert(err.response?.data?.message || 'Failed to delete record. Please try again.');
+        } finally {
+            setPendingDelete(null);
         }
-
-        setPendingDelete(null);
-    };
-
-    const handleUndo = () => {
-        if (!undoSnapshot?.previousList) return;
-
-        // TODO: Hook up backend undo/sync if deletes were persisted server-side
-        setHistoryItems(undoSnapshot.previousList);
-        dismissUndo();
     };
 
     const getContentTypeIcon = (type) => {
@@ -209,8 +162,8 @@ const History = () => {
     };
 
     const modalMessage = pendingDelete?.type === 'ALL'
-        ? `This will permanently remove all ${historyItems.length} detection record${historyItems.length === 1 ? '' : 's'} from your history. This action cannot be undone after the 5-second recovery window.`
-        : 'This detection record will be removed from your history. You can undo this action within 5 seconds.';
+        ? `This will permanently remove all ${historyItems.length} detection record${historyItems.length === 1 ? '' : 's'} from your history. This action cannot be undone.`
+        : 'This detection record will be permanently removed from your history. This action cannot be undone.';
 
     const modalTitle = pendingDelete?.type === 'ALL'
         ? 'Delete All History?'
@@ -363,17 +316,6 @@ const History = () => {
                 </div>
             )}
 
-            {undoSnapshot && (
-                <div className="history-undo-banner" role="status" aria-live="polite">
-                    <p className="history-undo-text">
-                        <strong>{undoSnapshot.label}</strong> — Undo available for 5 seconds
-                    </p>
-                    <button type="button" className="history-undo-btn" onClick={handleUndo}>
-                        <RotateCcw size={15} />
-                        Undo
-                    </button>
-                </div>
-            )}
         </div>
     );
 };
