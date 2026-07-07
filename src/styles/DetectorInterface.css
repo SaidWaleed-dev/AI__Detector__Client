@@ -11,6 +11,8 @@
   padding-left: 0;
   background-color: var(--bg-page);
   color: var(--text-primary);
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .detector-main {
@@ -24,6 +26,7 @@
   overflow-y: auto;
   position: relative;
   background-color: var(--bg-page);
+  box-sizing: border-box;
 }
 
 .detector-content-shell {
@@ -66,6 +69,8 @@
 
 .tab-group {
   flex: 1;
+  box-sizing: border-box;
+  overflow-x: hidden;
   min-width: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -74,13 +79,19 @@
   background: #080808;
   padding: 0.35rem;
   border-radius: 10px;
-  .detector-results-panel,
-  .detector-editor-area,
-  .detector-toolbar,
-  .detector-action-bar {
-    min-width: 0;
-  }
   border: 1px solid var(--border-subtle);
+}
+
+.detector-results-panel,
+.detector-editor-area,
+.detector-toolbar,
+.detector-action-bar {
+  min-width: 0;
+  .toolbar-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 .clean-tab {
@@ -97,7 +108,11 @@
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   background: transparent;
+  justify-content: center;
   cursor: pointer;
+  .detector-action-bar .primary-btn {
+    width: 100%;
+  }
   letter-spacing: 0.04em;
 }
 
@@ -416,8 +431,13 @@
   }
   .tab-group {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.25rem;
+  }
+  .clean-tab {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 0;
   }
 }
 
