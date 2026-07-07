@@ -524,17 +524,6 @@ const Home = () => {
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                style={{
-                    padding: '8rem 2.5rem 6rem',
-                    maxWidth: '1400px',
-                    margin: '0 auto',
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    alignItems: 'center',
-                    gap: '4rem',
-                    position: 'relative',
-                    zIndex: 3
-                }}
             >
                 {/* Hero Information */}
                 <div style={{ textAlign: 'start' }}>
@@ -552,11 +541,7 @@ const Home = () => {
                         <span>{t.badge}</span>
                     </motion.div>
 
-                    <motion.h1 variants={itemVariants} style={{
-                        fontSize: 'clamp(2.5rem, 5vw, 4.2rem)', fontWeight: '900', marginBottom: '2rem',
-                        lineHeight: '1.15', letterSpacing: '-0.04em', color: 'var(--text-primary)',
-                        fontFamily: 'var(--font-heading)'
-                    }}>
+                    <motion.h1 variants={itemVariants} className="home-hero-title">
                         {lang === 'ar' ? (
                             <>
                                 حماية نزاهة المعلومات <br />
@@ -582,15 +567,11 @@ const Home = () => {
                         {t.heroDesc}
                     </motion.p>
 
-                    <motion.div variants={itemVariants} style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-                        <Link to="/auth/login" className="primary-btn" style={{
-                            padding: '1.2rem 3rem', fontSize: '1.1rem', borderRadius: '14px',
-                        }}>
+                    <motion.div variants={itemVariants} className="home-hero-btn-container">
+                        <Link to="/auth/login" className="primary-btn home-hero-btn">
                             {t.initPlatform} <ArrowRight size={20} style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none' }} />
                         </Link>
-                        <Link to="/auth/register" className="secondary-btn" style={{
-                            padding: '1.2rem 3rem', fontSize: '1.1rem', borderRadius: '14px',
-                        }}>
+                        <Link to="/auth/register" className="secondary-btn home-hero-btn">
                             {t.sandbox} <UserPlus size={20} />
                         </Link>
                     </motion.div>
@@ -620,16 +601,16 @@ const Home = () => {
             </motion.div>
 
             {/* STATISTICS AND TELEMETRY GRID */}
-            <div style={{ maxWidth: '1400px', margin: '4rem auto 8rem', padding: '0 2.5rem', position: 'relative', zIndex: 3 }}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'stretch' }}>
+            <div className="home-stats-section">
+                <div className="home-stats-container">
 
                     {/* Left: Interactive SVGs Charts */}
-                    <div style={{ flex: '1.5 1 400px' }}>
+                    <div className="home-stats-chart-wrap">
                         <TelemetryChart />
                     </div>
 
                     {/* Right: Numerical metrics cards */}
-                    <div style={{ flex: '1 1 300px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                    <div className="home-stats-grid">
                         <StatCard label={t.stat_verified} targetValue="1,489,203" suffix="+" />
                         <StatCard label={t.stat_latency} targetValue="240" suffix="ms" />
                         <StatCard label={t.stat_precision} targetValue="99.4" suffix="%" />
@@ -640,17 +621,17 @@ const Home = () => {
             </div>
 
             {/* MULTI-MODAL CAPABILITIES FEATURES */}
-            <div id="features" style={{ maxWidth: '1400px', margin: '6rem auto 10rem', padding: '0 2.5rem', position: 'relative', zIndex: 3 }}>
-                <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
-                    <h2 style={{ fontSize: '2.5rem', fontWeight: '800', fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>
+            <div id="features" className="home-features-section">
+                <div className="home-features-header">
+                    <h2>
                         {t.modality_title}
                     </h2>
-                    <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '1rem auto 0', fontSize: '1.1rem' }}>
+                    <p>
                         {t.modality_desc}
                     </p>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
+                <div className="home-features-grid">
                     <FeatureCard
                         icon={Zap}
                         title={t.feat_1_title}
@@ -669,10 +650,8 @@ const Home = () => {
                 </div>
             </div>
 
-
-
             {/* ABOUT SECTION */}
-            <section id="about" style={{ maxWidth: '1400px', margin: '0 auto 8rem', padding: '0 2.5rem', position: 'relative', zIndex: 3 }}>
+            <section id="about" className="home-about-section">
                 <div className="about-card">
                     <div className="gold-glow-overlay" />
                     <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>

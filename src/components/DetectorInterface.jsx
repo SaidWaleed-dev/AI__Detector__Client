@@ -134,7 +134,7 @@ const DetectorInterface = () => {
                                     onClick={() => handleTabChange(id)}
                                 >
                                     <Icon size={18} style={{ verticalAlign: 'middle', [iconMargin]: '6px' }} />
-                                    {label}
+                                    <span className="tab-label">{label}</span>
                                 </button>
                             ))}
                         </div>
