@@ -598,10 +598,10 @@ const Home = () => {
 
                 {/* Hero Visual Block */}
                 <motion.div
+                    className="hero-visual-card"
                     variants={itemVariants}
                     style={{
                         background: 'radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%)',
-                        padding: '3rem',
                         borderRadius: '24px',
                         border: '1px solid rgba(212, 175, 55, 0.08)',
                         backdropFilter: 'blur(20px)',

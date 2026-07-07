@@ -150,4 +150,14 @@
 :root[data-theme='light'] #pricing > div:nth-child(2) > div:nth-child(2) {
     border: 2px solid var(--accent-primary) !important;
     background: rgba(197, 155, 39, 0.05) !important;
+}
+
+.hero-visual-card {
+    padding: 3rem;
+}
+
+@media (max-width: 768px) {
+    .hero-visual-card {
+        padding: 1.5rem 1rem !important;
+    }
 }

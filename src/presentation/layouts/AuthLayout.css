@@ -202,6 +202,14 @@
     }
 }
 
+@media (max-width: 768px) {
+    .auth-layout {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+}
+
 @media (max-width: 480px) {
     .auth-card {
         padding: 2.2rem 1.8rem;

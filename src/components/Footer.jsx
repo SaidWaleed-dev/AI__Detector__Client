@@ -22,7 +22,7 @@ const Footer = () => {
                     </p>
                     <div className="social-links">
                         <a href="https://twitter.com" className="social-link" target="_blank" rel="noreferrer"><Twitter size={20} /></a>
-                        <a href="https://github.com" className="social-link" target="_blank" rel="noreferrer"><Github size={20} /></a>
+                        <a href="https://github.com/SaidWaleed-dev" className="social-link" target="_blank" rel="noreferrer"><Github size={20} /></a>
                         <a href="https://linkedin.com" className="social-link" target="_blank" rel="noreferrer"><Linkedin size={20} /></a>
                         <a href="mailto:info@sentinelai.com" className="social-link"><Mail size={20} /></a>
                     </div>

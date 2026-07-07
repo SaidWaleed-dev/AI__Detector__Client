@@ -51,14 +51,14 @@ const Header = ({ activeSection }) => {
                 <nav className="nav">
                     <button 
                         onClick={() => handleScrollToSection('home')} 
-                        className={`nav-link ${isLinkActive('home', '/') ? 'active' : ''}`}
+                        className={`nav-link desktop-only ${isLinkActive('home', '/') ? 'active' : ''}`}
                         style={{ background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', display: 'flex', alignItems: 'center' }}
                     >
                         {t.home}
                     </button>
                     <button 
                         onClick={() => handleScrollToSection('features')} 
-                        className={`nav-link ${isLinkActive('features', '/') ? 'active' : ''}`}
+                        className={`nav-link desktop-only ${isLinkActive('features', '/') ? 'active' : ''}`}
                         style={{ background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', display: 'flex', alignItems: 'center' }}
                     >
                         {t.features}
@@ -66,7 +66,7 @@ const Header = ({ activeSection }) => {
 
                     <button 
                         onClick={() => handleScrollToSection('about')} 
-                        className={`nav-link ${isLinkActive('about', '/') ? 'active' : ''}`}
+                        className={`nav-link desktop-only ${isLinkActive('about', '/') ? 'active' : ''}`}
                         style={{ background: 'none', border: 'none', cursor: 'pointer', font: 'inherit', display: 'flex', alignItems: 'center' }}
                     >
                         {t.about}
