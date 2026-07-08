@@ -125,7 +125,7 @@ const Header = ({ activeSection }) => {
               setLang(lang === "en" ? "ar" : "en");
               closeMenu();
             }}
-            className="nav-link"
+            className="nav-link desktop-only"
             style={{
               background: "none",
               border: "none",
@@ -148,7 +148,7 @@ const Header = ({ activeSection }) => {
               toggleTheme();
               closeMenu();
             }}
-            className="nav-link"
+            className="nav-link desktop-only"
             style={{
               background: "none",
               border: "none",
@@ -192,13 +192,34 @@ const Header = ({ activeSection }) => {
             </Link>
           )}
         </nav>
-        <button
-          className="mobile-menu-toggle"
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        
+        <div className="mobile-header-actions">
+          <button
+            onClick={() => toggleTheme()}
+            className="mobile-action-btn"
+            title="Toggle Theme"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+
+          <button
+            onClick={() => setLang(lang === "en" ? "ar" : "en")}
+            className="mobile-action-btn"
+            title="Toggle Language"
+            aria-label="Toggle language"
+          >
+            <Globe size={20} />
+          </button>
+
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
     </motion.header>
   );

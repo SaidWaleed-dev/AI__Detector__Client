@@ -566,35 +566,37 @@
   }
 
   .history-delete-all-btn {
-    flex-shrink: 0;
-    padding: 0.75rem 1rem;
-    font-size: 0.75rem;
-    height: 40px;
-    display: flex;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 14px;
+    display: inline-flex;
     align-items: center;
-    white-space: nowrap;
+    justify-content: center;
+    background: rgba(255, 77, 77, 0.06);
+    border: 1px solid rgba(255, 77, 77, 0.25);
+    color: var(--status-error);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: all 0.2s ease;
+  }
+
+  .history-delete-all-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
   }
 
   .history-toolbar {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.75rem;
-    align-items: center;
     width: 100%;
   }
 
   .history-search-wrap {
-    min-width: 0;
-  }
-
-  .history-delete-all-btn {
-    justify-self: stretch;
     width: 100%;
-  }
-
-  .history-delete-all-btn svg {
-    width: 14px;
-    height: 14px;
+    min-width: 0;
   }
 
   .history-card-meta-left {
