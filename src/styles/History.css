@@ -577,7 +577,7 @@
 
   .history-toolbar {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     gap: 0.75rem;
     align-items: center;
     width: 100%;
@@ -588,8 +588,8 @@
   }
 
   .history-delete-all-btn {
-    justify-self: end;
-    width: auto;
+    justify-self: stretch;
+    width: 100%;
   }
 
   .history-delete-all-btn svg {
