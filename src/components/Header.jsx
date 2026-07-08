@@ -143,52 +143,7 @@ const Header = ({ activeSection }) => {
             </>
           )}
 
-          {/* Language Switcher */}
-          <button
-            type="button"
-            onClick={() => {
-              setLang(lang === "en" ? "ar" : "en");
-              closeMenu();
-            }}
-            className="nav-link desktop-only"
-            style={{
-              background: "none",
-              border: "none",
-              color: "var(--text-secondary)",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              font: "inherit",
-            }}
-            title="Toggle Language"
-          >
-            <Globe size={16} />
-            <span>{t.language}</span>
-          </button>
-
-          {/* Theme Toggle */}
-          <button
-            type="button"
-            onClick={() => {
-              toggleTheme();
-              closeMenu();
-            }}
-            className="nav-link desktop-only"
-            style={{
-              background: "none",
-              border: "none",
-              color: "var(--text-secondary)",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "0 0.5rem",
-            }}
-            title="Toggle Theme"
-          >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+          {/* Desktop-only nav items are rendered above; mobile controls remain outside the menu */}
 
           {isAuthenticated && !isHomePage && (
             <button
