@@ -72,6 +72,8 @@
 }
 
 .nav-link {
+  background: transparent;
+  border: none;
   text-decoration: none;
   color: var(--text-secondary);
   font-weight: 600;
@@ -201,6 +203,17 @@
   }
   .nav.mobile-open .nav-link.desktop-only {
     display: flex !important;
+    width: 100%;
+    padding: 0.95rem 1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    text-align: center;
+  }
+  .nav.mobile-open .nav-link.desktop-only:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--text-primary);
   }
   .header-container {
     padding: 0 1rem;
