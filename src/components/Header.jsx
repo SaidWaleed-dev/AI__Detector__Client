@@ -243,6 +243,7 @@ const Header = ({ activeSection }) => {
 
         <div className="mobile-header-actions">
           <button
+            type="button"
             onClick={() => toggleTheme()}
             className="mobile-action-btn"
             title="Toggle Theme"
@@ -250,7 +251,6 @@ const Header = ({ activeSection }) => {
           >
             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-          type="button"
           <button
             onClick={() => setLang(lang === "en" ? "ar" : "en")}
             className="mobile-action-btn"

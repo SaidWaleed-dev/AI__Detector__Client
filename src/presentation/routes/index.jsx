@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
+import DashboardLayout from "../../components/DashboardLayout";
 import { lazy, Suspense } from "react";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import { Loader2 } from "lucide-react";
@@ -44,24 +45,40 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
       {
-        path: "dashboard",
+        index: true,
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={fallback}>
-              <DetectorInterface />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={fallback}>
+            <DetectorInterface />
+          </Suspense>
         ),
       },
+    ],
+  },
+  {
+    path: "/history",
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
       {
-        path: "history",
+        index: true,
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={fallback}>
-              <History />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={fallback}>
+            <History />
+          </Suspense>
         ),
       },
     ],
