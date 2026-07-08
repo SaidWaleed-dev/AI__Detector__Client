@@ -1,6 +1,8 @@
 import {
   LogIn,
   LayoutDashboard,
+  LogOut,
+  History as HistoryIcon,
   ChevronRight,
   Sun,
   Moon,
@@ -18,7 +20,7 @@ import "../styles/Header.css";
 
 const Header = ({ activeSection }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, logout } = useAuthStore();
   const { theme, toggleTheme, lang, setLang } = useSettingsStore();
   const location = useLocation();
   const navigate = useNavigate();
@@ -48,6 +50,12 @@ const Header = ({ activeSection }) => {
   };
 
   const closeMenu = () => setMenuOpen(false);
+
+  const handleLogout = async () => {
+    await logout();
+    closeMenu();
+    navigate("/");
+  };
 
   return (
     <motion.header
@@ -164,6 +172,51 @@ const Header = ({ activeSection }) => {
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
+          {isAuthenticated && (
+            <button
+              onClick={() => {
+                closeMenu();
+                navigate("/history");
+              }}
+              className="nav-link desktop-only"
+              style={{
+                background: "none",
+                border: "none",
+                color: "var(--text-secondary)",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                font: "inherit",
+              }}
+              title={t.history}
+            >
+              <HistoryIcon size={16} />
+              <span>{t.history}</span>
+            </button>
+          )}
+
+          {isAuthenticated && (
+            <button
+              onClick={handleLogout}
+              className="nav-link desktop-only"
+              style={{
+                background: "none",
+                border: "none",
+                color: "var(--text-secondary)",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                font: "inherit",
+              }}
+              title={t.logout}
+            >
+              <LogOut size={16} />
+              <span>{t.logout}</span>
+            </button>
+          )}
+
           {isAuthenticated ? (
             <Link
               to="/dashboard"
@@ -192,7 +245,7 @@ const Header = ({ activeSection }) => {
             </Link>
           )}
         </nav>
-        
+
         <div className="mobile-header-actions">
           <button
             onClick={() => toggleTheme()}
