@@ -2,7 +2,6 @@ import {
   LogIn,
   LayoutDashboard,
   LogOut,
-  History as HistoryIcon,
   ChevronRight,
   Sun,
   Moon,
@@ -24,6 +23,8 @@ const Header = ({ activeSection }) => {
   const { theme, toggleTheme, lang, setLang } = useSettingsStore();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const isHomePage = location.pathname === "/";
 
   const t = translations[lang];
 
@@ -57,6 +58,11 @@ const Header = ({ activeSection }) => {
     navigate("/");
   };
 
+  const handleNavigate = (path) => {
+    navigate(path);
+    closeMenu();
+  };
+
   return (
     <motion.header
       className="header"
@@ -83,49 +89,53 @@ const Header = ({ activeSection }) => {
         </Link>
 
         <nav className={`nav ${menuOpen ? "mobile-open" : ""}`}>
-          <button
-            onClick={() => handleScrollToSection("home")}
-            className={`nav-link desktop-only ${isLinkActive("home", "/") ? "active" : ""}`}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              font: "inherit",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {t.home}
-          </button>
-          <button
-            onClick={() => handleScrollToSection("features")}
-            className={`nav-link desktop-only ${isLinkActive("features", "/") ? "active" : ""}`}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              font: "inherit",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {t.features}
-          </button>
-
-          <button
-            onClick={() => handleScrollToSection("about")}
-            className={`nav-link desktop-only ${isLinkActive("about", "/") ? "active" : ""}`}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              font: "inherit",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {t.about}
-          </button>
+          {isHomePage ? (
+            <>
+              <button
+                onClick={() => handleScrollToSection("home")}
+                className={`nav-link desktop-only ${isLinkActive("home", "/") ? "active" : ""}`}
+              >
+                {t.home}
+              </button>
+              <button
+                onClick={() => handleScrollToSection("features")}
+                className={`nav-link desktop-only ${isLinkActive("features", "/") ? "active" : ""}`}
+              >
+                {t.features}
+              </button>
+              <button
+                onClick={() => handleScrollToSection("about")}
+                className={`nav-link desktop-only ${isLinkActive("about", "/") ? "active" : ""}`}
+              >
+                {t.about}
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => handleNavigate("/")}
+                className="nav-link desktop-only"
+              >
+                {t.home}
+              </button>
+              {isAuthenticated && (
+                <button
+                  onClick={() => handleNavigate("/dashboard")}
+                  className="nav-link desktop-only"
+                >
+                  {t.dashboard}
+                </button>
+              )}
+              {isAuthenticated && (
+                <button
+                  onClick={() => handleNavigate("/history")}
+                  className="nav-link desktop-only"
+                >
+                  {t.history}
+                </button>
+              )}
+            </>
+          )}
 
           {/* Language Switcher */}
           <button
@@ -172,31 +182,7 @@ const Header = ({ activeSection }) => {
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {isAuthenticated && (
-            <button
-              onClick={() => {
-                closeMenu();
-                navigate("/history");
-              }}
-              className="nav-link desktop-only"
-              style={{
-                background: "none",
-                border: "none",
-                color: "var(--text-secondary)",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.4rem",
-                font: "inherit",
-              }}
-              title={t.history}
-            >
-              <HistoryIcon size={16} />
-              <span>{t.history}</span>
-            </button>
-          )}
-
-          {isAuthenticated && (
+          {isAuthenticated && !isHomePage && (
             <button
               onClick={handleLogout}
               className="nav-link desktop-only"
