@@ -393,8 +393,7 @@
   }
   .detector-toolbar {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr auto;
     align-items: stretch;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
@@ -402,7 +401,7 @@
   }
   .tab-group {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.6rem;
     width: 100%;
   }
@@ -427,6 +426,9 @@
       0 4px 12px rgba(0, 0, 0, 0.4),
       inset 0 1px 1px rgba(255, 255, 255, 0.05);
     padding: 0;
+  }
+  .clean-tab .tab-label {
+    display: inline;
   }
   .clean-tab:hover {
     background: #141416;
@@ -506,6 +508,12 @@
 @media (max-width: 580px) {
   .detector-toolbar {
     padding: 0.75rem;
+  }
+  .clean-tab .tab-label {
+    display: none;
+  }
+  .tab-group {
+    grid-template-columns: 1fr;
   }
 }
 

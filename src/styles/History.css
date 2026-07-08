@@ -1,22 +1,18 @@
 /* History Page — matches DetectorInterface design tokens */
 
-.content-wrapper:has(.history-page-wrapper) {
+/* Avoid unsupported :has selector for broader browser compatibility */
+.history-page-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 0 !important;
-  margin-right: auto !important;
-  max-width: 1200px;
-}
-
-.history-page-wrapper {
-  padding-left: 0 !important;
-  margin-left: 0 !important;
   width: 100%;
   max-width: 1200px;
-  display: block;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
+
+/* The wrapper now handles its own layout directly */
 
 .history-page {
   padding: 2rem;

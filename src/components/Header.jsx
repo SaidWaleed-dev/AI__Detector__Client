@@ -93,17 +93,20 @@ const Header = ({ activeSection }) => {
             <>
               <button
                 onClick={() => handleScrollToSection("home")}
+                type="button"
                 className={`nav-link desktop-only ${isLinkActive("home", "/") ? "active" : ""}`}
               >
                 {t.home}
               </button>
               <button
+                type="button"
                 onClick={() => handleScrollToSection("features")}
                 className={`nav-link desktop-only ${isLinkActive("features", "/") ? "active" : ""}`}
               >
                 {t.features}
               </button>
               <button
+                type="button"
                 onClick={() => handleScrollToSection("about")}
                 className={`nav-link desktop-only ${isLinkActive("about", "/") ? "active" : ""}`}
               >
@@ -113,6 +116,7 @@ const Header = ({ activeSection }) => {
           ) : (
             <>
               <button
+                type="button"
                 onClick={() => handleNavigate("/")}
                 className="nav-link desktop-only"
               >
@@ -120,6 +124,7 @@ const Header = ({ activeSection }) => {
               </button>
               {isAuthenticated && (
                 <button
+                  type="button"
                   onClick={() => handleNavigate("/dashboard")}
                   className="nav-link desktop-only"
                 >
@@ -128,6 +133,7 @@ const Header = ({ activeSection }) => {
               )}
               {isAuthenticated && (
                 <button
+                  type="button"
                   onClick={() => handleNavigate("/history")}
                   className="nav-link desktop-only"
                 >
@@ -139,6 +145,7 @@ const Header = ({ activeSection }) => {
 
           {/* Language Switcher */}
           <button
+            type="button"
             onClick={() => {
               setLang(lang === "en" ? "ar" : "en");
               closeMenu();
@@ -162,6 +169,7 @@ const Header = ({ activeSection }) => {
 
           {/* Theme Toggle */}
           <button
+            type="button"
             onClick={() => {
               toggleTheme();
               closeMenu();
@@ -184,6 +192,7 @@ const Header = ({ activeSection }) => {
 
           {isAuthenticated && !isHomePage && (
             <button
+              type="button"
               onClick={handleLogout}
               className="nav-link desktop-only"
               style={{
@@ -241,7 +250,7 @@ const Header = ({ activeSection }) => {
           >
             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-
+          type="button"
           <button
             onClick={() => setLang(lang === "en" ? "ar" : "en")}
             className="mobile-action-btn"
@@ -250,8 +259,8 @@ const Header = ({ activeSection }) => {
           >
             <Globe size={20} />
           </button>
-
           <button
+            type="button"
             className="mobile-menu-toggle"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Toggle menu"
