@@ -175,9 +175,29 @@ const History = () => {
       case 1:
         return <div className="history-content-text">{data}</div>;
       case 2:
+        // If `data` isn't a URL or data URI, show it as text instead of a broken image
+        if (
+          !data ||
+          (!data.startsWith("http://") &&
+            !data.startsWith("https://") &&
+            !data.startsWith("data:") &&
+            !data.startsWith("/"))
+        ) {
+          return <div className="history-content-text">{String(data)}</div>;
+        }
+
         return (
           <div className="history-content-image">
-            <img src={getMediaUrl(data)} alt="Analyzed content" />
+            <img
+              src={getMediaUrl(data)}
+              alt="Analyzed content"
+              onError={(e) => {
+                // hide broken image to avoid ugly icon; console log for debugging
+                // eslint-disable-next-line no-console
+                console.warn("[History] image load failed for", e.target.src);
+                e.target.style.display = "none";
+              }}
+            />
           </div>
         );
       case 3:

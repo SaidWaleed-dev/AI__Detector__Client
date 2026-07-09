@@ -31,6 +31,9 @@
   text-decoration: none;
   transition: transform 0.3s ease;
   white-space: nowrap;
+  /* Ensure logo sits above mobile action buttons in RTL / mobile layouts */
+  position: relative;
+  z-index: 1003;
 }
 
 .logo:hover {
@@ -257,7 +260,8 @@
 
   :root[dir="rtl"] .mobile-header-actions {
     right: auto;
-    left: 1rem;
+    /* move actions further from the left edge so they don't overlap the logo */
+    left: 3.75rem;
   }
 
   .header-container {
