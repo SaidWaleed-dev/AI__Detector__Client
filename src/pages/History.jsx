@@ -72,9 +72,22 @@ const getMediaUrl = (path) => {
   ) {
     return path;
   }
-  const apiBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:5050";
+
+  const localFallback = "http://localhost:5050";
+  const apiBaseUrl = import.meta.env.VITE_API_URL || localFallback;
   const cleanPath = path.startsWith("/") ? path.slice(1) : path;
   const cleanBase = apiBaseUrl.endsWith("/") ? apiBaseUrl : `${apiBaseUrl}/`;
+
+  // If the app is loaded over HTTPS and the API URL is still the localhost fallback,
+  // avoid a mixed-content HTTP request by using the current origin as a fallback.
+  if (
+    typeof window !== "undefined" &&
+    window.location.protocol === "https:" &&
+    apiBaseUrl === localFallback
+  ) {
+    return `${window.location.origin}/${cleanPath}`;
+  }
+
   return `${cleanBase}${cleanPath}`;
 };
 
