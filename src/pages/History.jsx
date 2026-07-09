@@ -191,11 +191,22 @@ const History = () => {
             <img
               src={getMediaUrl(data)}
               alt="Analyzed content"
+              style={{ width: "100%", height: "auto", display: "block" }}
               onError={(e) => {
-                // hide broken image to avoid ugly icon; console log for debugging
+                // Replace broken image with a visible SVG placeholder so user knows it's unavailable
                 // eslint-disable-next-line no-console
                 console.warn("[History] image load failed for", e.target.src);
-                e.target.style.display = "none";
+                try {
+                  e.target.onerror = null;
+                  const svg = encodeURIComponent(
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200"><rect width="100%" height="100%" fill="#0b0b0b"/><text x="50%" y="50%" fill="#d4af37" font-size="14" text-anchor="middle" dominant-baseline="middle">Image unavailable</text></svg>`,
+                  );
+                  e.target.src = `data:image/svg+xml;utf8,${svg}`;
+                  e.target.style.objectFit = "contain";
+                  e.target.style.background = "transparent";
+                } catch (ex) {
+                  e.target.style.display = "none";
+                }
               }}
             />
           </div>
