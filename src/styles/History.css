@@ -289,6 +289,9 @@
   width: 100%;
   height: auto;
   display: block;
+  min-height: 140px;
+  object-fit: contain;
+  background: var(--bg-surface-secondary);
 }
 
 .history-content-media {
