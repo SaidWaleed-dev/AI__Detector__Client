@@ -52,6 +52,17 @@ const filterHistoryItems = (items, query) => {
     });
 };
 
+const getMediaUrl = (path) => {
+    if (!path) return '';
+    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
+        return path;
+    }
+    const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5050';
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const cleanBase = apiBaseUrl.endsWith('/') ? apiBaseUrl : `${apiBaseUrl}/`;
+    return `${cleanBase}${cleanPath}`;
+};
+
 const History = () => {
     const [historyItems, setHistoryItems] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -137,7 +148,7 @@ const History = () => {
             case 2:
                 return (
                     <div className="history-content-image">
-                        <img src={data} alt="Analyzed content" />
+                        <img src={getMediaUrl(data)} alt="Analyzed content" />
                     </div>
                 );
             case 3:
@@ -145,7 +156,7 @@ const History = () => {
                     <div className="history-content-media">
                         <Video size={24} color="var(--accent-primary)" />
                         <span>Video Analysis</span>
-                        <a href={data} target="_blank" rel="noopener noreferrer">View Video</a>
+                        <a href={getMediaUrl(data)} target="_blank" rel="noopener noreferrer">View Video</a>
                     </div>
                 );
             case 4:
@@ -153,7 +164,7 @@ const History = () => {
                     <div className="history-content-media">
                         <Music size={24} color="var(--accent-primary)" />
                         <span>Audio Analysis</span>
-                        <a href={data} target="_blank" rel="noopener noreferrer">Listen Audio</a>
+                        <a href={getMediaUrl(data)} target="_blank" rel="noopener noreferrer">Listen Audio</a>
                     </div>
                 );
             default:
