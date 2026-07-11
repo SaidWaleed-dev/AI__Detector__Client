@@ -63,8 +63,17 @@ const filterHistoryItems = (items, query) => {
   });
 };
 
+const PRODUCTION_SERVER_URL = "https://saidwaleed-001-site1.jtempurl.com";
+const LOCAL_FALLBACK = "http://localhost:5050";
+
 const getMediaUrl = (path) => {
   if (!path) return "";
+
+  // Fix old localhost URLs saved before the BaseUrl config bug was fixed
+  if (path.startsWith(LOCAL_FALLBACK)) {
+    return path.replace(LOCAL_FALLBACK, PRODUCTION_SERVER_URL);
+  }
+
   if (
     path.startsWith("http://") ||
     path.startsWith("https://") ||
@@ -73,19 +82,18 @@ const getMediaUrl = (path) => {
     return path;
   }
 
-  const localFallback = "http://localhost:5050";
-  const apiBaseUrl = import.meta.env.VITE_API_URL || localFallback;
+  const apiBaseUrl = import.meta.env.VITE_API_URL || LOCAL_FALLBACK;
   const cleanPath = path.startsWith("/") ? path.slice(1) : path;
   const cleanBase = apiBaseUrl.endsWith("/") ? apiBaseUrl : `${apiBaseUrl}/`;
 
   // If the app is loaded over HTTPS and the API URL is still the localhost fallback,
-  // avoid a mixed-content HTTP request by using the current origin as a fallback.
+  // avoid a mixed-content HTTP request by using the production server instead.
   if (
     typeof window !== "undefined" &&
     window.location.protocol === "https:" &&
-    apiBaseUrl === localFallback
+    apiBaseUrl === LOCAL_FALLBACK
   ) {
-    return `${window.location.origin}/${cleanPath}`;
+    return `${PRODUCTION_SERVER_URL}/${cleanPath}`;
   }
 
   return `${cleanBase}${cleanPath}`;
