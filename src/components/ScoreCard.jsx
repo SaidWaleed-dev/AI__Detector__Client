@@ -13,7 +13,9 @@ const ScoreCard = ({ result }) => {
 
     const actualResult = result?.results?.[0] || result;
     const aiProbability = actualResult?.aiProbability ?? 0;
-    const probabilityPercent = Math.round(aiProbability * 100);
+    
+    // Smart probability conversion: if <= 1 (fraction), multiply by 100. Otherwise, use as is.
+    const probabilityPercent = aiProbability <= 1 ? Math.round(aiProbability * 100) : Math.round(aiProbability);
 
     useEffect(() => {
         if (!result) return;
