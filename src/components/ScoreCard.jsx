@@ -47,10 +47,10 @@ const ScoreCard = ({ result }) => {
         detailsObj = actualResult.details;
     }
 
-    const confidence     = detailsObj.Confidence    || detailsObj.confidence    || 0.95;
-    const processingTime = detailsObj.ProcessingTimeMs || detailsObj.processingTimeMs || 240;
-    const indicators     = detailsObj.Indicators   || detailsObj.indicators    || {};
-    const burstiness     = indicators.burstiness   || 0.82;
+        const confidence     = detailsObj.Confidence    ?? detailsObj.confidence    ?? 0.95;
+    const processingTime = detailsObj.ProcessingTimeMs ?? detailsObj.processingTimeMs ?? 240;
+    const indicators     = detailsObj.Indicators   ?? detailsObj.indicators    ?? {};
+    const burstiness     = indicators.burstiness   ?? 0.82;
     const confidencePercent = Math.round(confidence * 100);
 
     let statusColor = 'var(--status-success)';
